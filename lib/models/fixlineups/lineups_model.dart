@@ -198,27 +198,27 @@ class Team {
     final int id;
     final String name;
     final String logo;
-    final String? colors;
+    // final String? colors;
 
     Team({
         required this.id,
         required this.name,
         required this.logo,
-        required this.colors,
+        // required this.colors,
     });
 
     factory Team.fromJson(Map<String, dynamic> json) => Team(
         id: json["id"] ?? 0,
         name: json["name"] ?? '',
         logo: json["logo"] ?? '',
-        colors: json['colors'] ?? ''
+        // colors: json['colors'] ?? ''
     );
 
     Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
         "logo": logo,
-        "colors": colors
+        // "colors": colors
     };
 }
 

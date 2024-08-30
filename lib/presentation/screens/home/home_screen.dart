@@ -23,7 +23,25 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
-  DateTime selectedDate = DateTime.now();
+  late ValueNotifier<DateTime> selectedDateNotifier;
+  late Future<List<ResponseFixt>> _future;
+
+
+
+  @override
+  void initState() {
+    super.initState();
+    selectedDateNotifier = ValueNotifier<DateTime>(DateTime.now());
+    _fetchData();
+
+    selectedDateNotifier.addListener((){
+      _fetchData();
+    });
+  }
+
+  Future<void> _fetchData()async{
+    _future = FixtureProvider().fecthDataFixture(selectedDateNotifier.value);
+  }
 
   Future<void> _selectedDate(BuildContext context) async {
 
@@ -35,23 +53,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 barrierDismissible: false,
                 
               );
-    if (datePicked != null && datePicked != selectedDate) {
+    if (datePicked != null && datePicked != selectedDateNotifier.value) {
       // FixtureProvider().fecthDataFixture(selectedDate);
-
       setState(() {
-        selectedDate = datePicked;
+        selectedDateNotifier.value = datePicked;
       });
     }
-  }
-
-
-  // late Future<List<ResponseFixt>> _future;
-
-  @override
-  void initState() {
-    super.initState();
-    // _future = FixtureProvider().fecthDataFixture(selectedDate);
-    //Implementar un listener para que se recargue los nuevos datos de la fecha seleccionada
   }
 
   @override
@@ -74,16 +81,12 @@ class _HomeScreenState extends State<HomeScreen> {
             onPressed: () => context.push(LiguesScreen.path),
             child: Text("Leagues",style:  TextStyle(fontSize: letterSize * 0.025, fontWeight: FontWeight.bold,color: Colors.white),),
           ),
-           TextButton(
-            onPressed: () => context.push(TestScreen.path),
-            child: Text("LeaguTestes",style:  TextStyle(fontSize: letterSize * 0.025, fontWeight: FontWeight.bold,color: Colors.white),),
-          )
         ],
       ),
       body: Stack(
         children: [
           FutureBuilder(
-            future: FixtureProvider().fecthDataFixture(selectedDate),
+            future: _future,
             builder: (context, snapshot){
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(child: CircularProgressIndicator(),);

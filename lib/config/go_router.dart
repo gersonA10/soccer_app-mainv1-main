@@ -29,10 +29,10 @@ class AppRouter {
       builder: (context, state) => StatisticsScreen(),
     ),
 
-     GoRoute(
-      path: TestScreen.path,
-      name: TestScreen.name,
-      builder: (context, state) => TestScreen(),
-    ),
+    //  GoRoute(
+    //   path: TestScreen.path,
+    //   name: TestScreen.name,
+    //   builder: (context, state) => TestScreen(),
+    // ),
   ]);
 }

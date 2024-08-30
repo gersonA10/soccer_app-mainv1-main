@@ -40,6 +40,9 @@ class _DetailsMatchScreenState extends State<DetailsMatchScreen> {
         body: FutureBuilder(
           future: _futureLineups,
           builder: (context, snapshot) {
+            // if (snapshot.connectionState == ConnectionState.waiting) {
+            //   return const Center(child: CircularProgressIndicator(),);
+            // }
             final lineups = snapshot.data ?? [];
             return SingleChildScrollView(
               child: Column(
@@ -91,7 +94,7 @@ class _DetailsMatchScreenState extends State<DetailsMatchScreen> {
                           const Text('La informacion aun no han sido cargada, intenta mas tarde', textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontWeight: FontWeight.w300, fontSize: 18),),
                         ],
                       )
-                      : LinueUpHome(),
+                      :  LinueUpHome(lineupsResponse: snapshot.data,),
                       lineups.isEmpty
                       ? Column(
                         children: [
@@ -103,7 +106,7 @@ class _DetailsMatchScreenState extends State<DetailsMatchScreen> {
                           const Text('Las Estadisticas aun no han sido cargadas, intenta mas tarde', textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontWeight: FontWeight.w300, fontSize: 18),),
                         ],
                       )
-                      : LinueUpHome(),
+                      :  LinueUpHome(lineupsResponse: snapshot.data,),
                       // LineupsWidget(lineUps: snapshot.data!,),
                     ],
                   ),

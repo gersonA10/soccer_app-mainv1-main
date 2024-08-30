@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:soccer_app/models/fixlineups/lineups_model.dart';
 
 class LinueUpHome extends StatelessWidget {
+
+ final List<ResponseLine>? lineupsResponse;
+
   const LinueUpHome({
     super.key,
+    required this.lineupsResponse
   });
 
   @override
@@ -16,49 +21,51 @@ class LinueUpHome extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Titulares', style: TextStyle(color: Colors.white),),
-              Container(
-                height: 300,
-                width: 200,
+              const Text('Titulares', style: TextStyle(color: Colors.white),),
+               SizedBox(
+                height: 320,
+                width: 140,
                 child: ListView.builder(
-                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: 11,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: lineupsResponse?[0].startXi.length ?? 0,
                   itemBuilder: (BuildContext context, int index) {
-                    return const Row(
-                  children: [
-                    Text('1', style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.white),),
-                    SizedBox(width: 10,),
-                    Text('Arquero', style: TextStyle(fontSize: 17, color: Colors.white),),
+                    //*Variable separada para obtener al jugador
+                    final player = lineupsResponse![0].startXi[index].player;
+                    return  Row(
+                    children: [
+                    Text(player.number.toString(), style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.white),),
+                    const SizedBox(width: 10,),
+                    Text(player.name, style: const TextStyle(fontSize: 17, color: Colors.white),),
                   ],
                 );
                   },
                 ),
               ),
-              Text('Suplentes', style: TextStyle(color: Colors.white),),
+              const Text('Suplentes', style: TextStyle(color: Colors.white),),
             ],
           ),
           const Spacer(),
           Column(
             children: [
-              Text('Titulares', style: TextStyle(color: Colors.white),),
-              Container(
-                height: 300,
-                width: 100,
+              const Text('Titulares', style: TextStyle(color: Colors.white),),
+              SizedBox(
+                height: 320,
+                width: 150,
                 child: ListView.builder(
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: 11,
+                  itemCount: lineupsResponse?[1].startXi.length ?? 0,
                   itemBuilder: (BuildContext context, int index) {
-                    return const Row(
+                    return  Row(
                   children: [
-                    Text('1', style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.white),),
-                    SizedBox(width: 10,),
-                    Text('Arquero', style: TextStyle(fontSize: 17, color: Colors.white),),
+                    Text(lineupsResponse![1].startXi[index].player.number.toString(), style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.white),),
+                    const SizedBox(width: 10,),
+                    Text(lineupsResponse![1].startXi[index].player.name, style: const TextStyle(fontSize: 17, color: Colors.white),),
                   ],
                 );
                   },
                 ),
               ),
-              Text('Suplentes', style: TextStyle(color: Colors.white),),
+              const Text('Suplentes', style: TextStyle(color: Colors.white),),
             ],
           ),
         ],
