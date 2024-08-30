@@ -41,7 +41,27 @@ class LinueUpHome extends StatelessWidget {
                   },
                 ),
               ),
-              const Text('Suplentes', style: TextStyle(color: Colors.white),),
+              const SizedBox(height: 20,),
+              const Text('Suplentes', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),),
+               SizedBox(
+                height: 340,
+                width: 140,
+                child: ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: lineupsResponse?[0].substitutes.length ?? 0,
+                  itemBuilder: (BuildContext context, int index) {
+                    //*Variable separada para obtener al jugador
+                    final player = lineupsResponse![0].substitutes[index].player;
+                    return  Row(
+                    children: [
+                    Text(player.number.toString(), style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.white),),
+                    const SizedBox(width: 10,),
+                    Text(player.name, style: const TextStyle(fontSize: 17, color: Colors.white),),
+                  ],
+                );
+                  },
+                ),
+              ),
             ],
           ),
           const Spacer(),
@@ -65,7 +85,27 @@ class LinueUpHome extends StatelessWidget {
                   },
                 ),
               ),
-              const Text('Suplentes', style: TextStyle(color: Colors.white),),
+              const SizedBox(height: 20,),
+              const Text('Suplentes', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),),
+               SizedBox(
+                height: 340,
+                width: 140,
+                child: ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: lineupsResponse?[1].substitutes.length ?? 0,
+                  itemBuilder: (BuildContext context, int index) {
+                    //*Variable separada para obtener al jugador
+                    final player = lineupsResponse![1].substitutes[index].player;
+                    return  Row(
+                    children: [
+                    Text(player.number.toString(), style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.white),),
+                    const SizedBox(width: 10,),
+                    Text(player.name, style: const TextStyle(fontSize: 17, color: Colors.white),),
+                  ],
+                );
+                  },
+                ),
+              ),
             ],
           ),
         ],
