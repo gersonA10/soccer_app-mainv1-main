@@ -2,12 +2,12 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
+import 'package:soccer_app/l10n/app_localizations.dart';
 import 'package:soccer_app/models/fixlineups/fixture.dart';
 import 'package:soccer_app/presentation/providers/fixture/fixture_provider.dart';
 import 'package:soccer_app/presentation/screens/home/details_match/details_match.dart';
 import 'package:soccer_app/presentation/screens/ligues/ligues_sceen.dart';
-import 'package:soccer_app/presentation/screens/test_screen.dart';
+import 'package:soccer_app/presentation/screens/settings/settings_screen.dart';
 import 'package:soccer_app/presentation/widgets/center_side_widget.dart';
 import 'package:soccer_app/presentation/widgets/left_side_widget.dart';
 import 'package:soccer_app/presentation/widgets/right_side_widget.dart';
@@ -69,6 +69,13 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         backgroundColor:Colors.lightBlue.withOpacity(0.5), 
         actions: [
+           IconButton(
+            onPressed: () {
+              context.pushNamed(SettingsScreen.name);
+              //Nos va a redirigir a nuestra pantalla de configuraciones
+            }, 
+            icon: const Icon(Icons.settings, color: Colors.white,),
+          ),
           IconButton(
             onPressed: () {
               //Esto definira la fecha de el fixture que se mostrara
@@ -79,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           TextButton(
             onPressed: () => context.push(LiguesScreen.path),
-            child: Text("Leagues",style:  TextStyle(fontSize: letterSize * 0.025, fontWeight: FontWeight.bold,color: Colors.white),),
+            child: Text(AppLocalizations.of(context)!.title_leagues,style:  TextStyle(fontSize: letterSize * 0.025, fontWeight: FontWeight.bold,color: Colors.white),),
           ),
         ],
       ),

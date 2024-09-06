@@ -2,7 +2,6 @@ import 'package:go_router/go_router.dart';
 import 'package:soccer_app/presentation/screens/home/fixture_lineups.dart';
 import 'package:soccer_app/presentation/screens/home/statistics.dart';
 import 'package:soccer_app/presentation/screens/screens.dart';
-import 'package:soccer_app/presentation/screens/test_screen.dart';
 
 class AppRouter {
   static final appRouter = GoRouter(
@@ -29,10 +28,15 @@ class AppRouter {
       builder: (context, state) => StatisticsScreen(),
     ),
 
-    //  GoRoute(
-    //   path: TestScreen.path,
-    //   name: TestScreen.name,
-    //   builder: (context, state) => TestScreen(),
-    // ),
+     GoRoute(
+      path: SettingsScreen.path,
+      name: SettingsScreen.name,
+      builder: (context, state) => const SettingsScreen(),
+    ),
+    GoRoute(
+      path: ChangeLanguage.path,
+      name: ChangeLanguage.name,
+      builder: (context, state) => const ChangeLanguage(),
+    ),
   ]);
 }

@@ -40,9 +40,9 @@ class _DetailsMatchScreenState extends State<DetailsMatchScreen> {
         body: FutureBuilder(
           future: _futureLineups,
           builder: (context, snapshot) {
-            // if (snapshot.connectionState == ConnectionState.waiting) {
-            //   return const Center(child: CircularProgressIndicator(),);
-            // }
+            if (snapshot.connectionState == ConnectionState.waiting) return const Center(child: CircularProgressIndicator(),);
+
+          
             final lineups = snapshot.data ?? [];
             return SingleChildScrollView(
               child: Column(
@@ -52,9 +52,7 @@ class _DetailsMatchScreenState extends State<DetailsMatchScreen> {
                   team: widget.team,
                   fixture: widget.fixture,
                 ),
-                lineups.isEmpty ?
-                Container()
-                : Container(
+                lineups.isEmpty ? Container() : Container(
                   margin: const EdgeInsets.all(20),
                   height: 40,
                   width: 220,
@@ -112,7 +110,7 @@ class _DetailsMatchScreenState extends State<DetailsMatchScreen> {
                   ),
                 )
               ],
-                        ),
+            ),
             );
           },
          
